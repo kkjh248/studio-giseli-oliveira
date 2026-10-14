@@ -18,8 +18,8 @@ describe('Studio publication safeguards', () => {
   it('does not publish any of the six unconfirmed services', () => {
     expect(studio.services).toHaveLength(6)
     expect(confirmedServices(studio.services)).toEqual([])
-    const confirmed = { ...studio.services[0], confirmed: true }
-    expect(confirmedServices([confirmed, studio.services[1]])).toEqual([confirmed])
+    const confirmed = { id: 'afro', name: 'Cuidados com cabelos afro', description: '', image: '', confirmed: true }
+    expect(confirmedServices([confirmed, { ...confirmed, id: 'pending', confirmed: false }])).toEqual([confirmed])
   })
   it('does not fabricate a full address, opening hours, Instagram or reviews', () => {
     expect(studio.address).toBe('')
