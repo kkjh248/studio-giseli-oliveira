@@ -367,3 +367,6 @@
   html { scroll-behavior: auto; }
   *,*::before,*::after { animation: none !important; transition: none !important; }
 }
+
+/* Oculta o selo "Edit with Lovable" injetado na publicação */
+#lovable-badge { display: none !important; }
