@@ -1,24 +1,27 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute } from '@tanstack/react-router'
+import { Header } from '@/components/studio/header'
+import { Gallery } from '@/components/studio/gallery'
+import { Hero, About, Services, Differentials, BookingSteps, Testimonials, FAQ, Contact, Footer } from '@/components/studio/sections'
+import { studio } from '@/lib/studio'
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute('/')({
   component: Index,
-});
+  head: () => ({
+    meta: [
+      { title: 'Studio Giseli Oliveira | Cabelo Afro em Guarulhos' },
+      { name: 'description', content: studio.description },
+      { property: 'og:title', content: 'Studio Giseli Oliveira | Cabelo Afro em Guarulhos' },
+      { property: 'og:description', content: studio.description },
+      { property: 'og:type', content: 'website' },
+      { property: 'og:locale', content: 'pt_BR' },
+      { property: 'og:url', content: '/' },
+      { name: 'twitter:card', content: 'summary_large_image' },
+    ],
+    links: [{ rel: 'canonical', href: '/' }],
+    scripts: [{ type: 'application/ld+json', children: JSON.stringify({ '@context': 'https://schema.org', '@type': 'LocalBusiness', name: studio.name, description: studio.description, address: { '@type': 'PostalAddress', addressLocality: studio.city, addressRegion: studio.state, addressCountry: 'BR' } }) }],
+  }),
+})
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+  return <><a className="skip-link" href="#conteudo">Ir para o conteúdo</a><Header/><main id="conteudo"><Hero/><About/><Services/><Gallery/><Differentials/><BookingSteps/><Testimonials/><FAQ/><Contact/></main><Footer/></>
 }
